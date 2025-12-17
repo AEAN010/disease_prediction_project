@@ -1,8 +1,3 @@
-# =========================================================
-# Disease Prediction System using Symptoms & Machine Learning
-# SINGLE FILE PROJECT (MODEL + GUI + STREAMLIT)
-# =========================================================
-
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -15,9 +10,7 @@ from sklearn.metrics import accuracy_score
 import warnings
 warnings.filterwarnings("ignore")
 
-# ---------------------------------------------------------
-# PAGE CONFIG
-# ---------------------------------------------------------
+
 st.set_page_config(
     page_title="Disease Prediction System",
     page_icon="🩺",
@@ -27,9 +20,7 @@ st.set_page_config(
 st.title("🩺 Disease Prediction System")
 st.markdown("Predict diseases based on symptoms using **Machine Learning (Supervised Learning)**")
 
-# ---------------------------------------------------------
-# DATASET CREATION
-# ---------------------------------------------------------
+
 @st.cache_data
 def create_dataset(n_samples=2000):
 
@@ -85,9 +76,7 @@ def create_dataset(n_samples=2000):
     df = pd.DataFrame(data, columns=symptoms + ['disease'])
     return df, symptoms
 
-# ---------------------------------------------------------
-# MODEL TRAINING
-# ---------------------------------------------------------
+
 @st.cache_resource
 def train_model():
     df, symptoms = create_dataset()
@@ -111,9 +100,7 @@ def train_model():
 
 model, label_encoder, symptoms, accuracy = train_model()
 
-# ---------------------------------------------------------
-# SIDEBAR NAVIGATION
-# ---------------------------------------------------------
+
 st.sidebar.title("📂 Navigation")
 
 menu = st.sidebar.radio(
@@ -121,9 +108,7 @@ menu = st.sidebar.radio(
     ["Disease Prediction", "Project Details", "About"]
 )
 
-# ---------------------------------------------------------
-# DISEASE PREDICTION PAGE
-# ---------------------------------------------------------
+
 if menu == "Disease Prediction":
 
     st.subheader("🔍 Select Symptoms")
@@ -156,9 +141,7 @@ if menu == "Disease Prediction":
                     f": {probabilities[idx]*100:.2f}%"
                 )
 
-# ---------------------------------------------------------
-# PROJECT DETAILS PAGE
-# ---------------------------------------------------------
+
 elif menu == "Project Details":
 
     st.subheader("📌 Project Details")
@@ -183,9 +166,7 @@ elif menu == "Project Details":
     - Reduces overfitting
     """)
 
-# ---------------------------------------------------------
-# ABOUT PAGE
-# ---------------------------------------------------------
+
 elif menu == "About":
 
     st.subheader("ℹ️ About This Application")
@@ -203,9 +184,7 @@ elif menu == "About":
 
     st.info("Machine Learning–Based Disease Prediction for Early Diagnosis")
 
-# ---------------------------------------------------------
-# FOOTER
-# ---------------------------------------------------------
+
 st.divider()
 st.caption("A Data-Driven Approach to Disease Prediction Using ML Models.")
 
